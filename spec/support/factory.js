@@ -1,4 +1,11 @@
-var factory = require('factory-girl').factory;  
+var factory = require('factory-girl')
+const adapter = new factory.SequelizeAdapter();
+factory = factory.factory;
+factory.setAdapter(adapter);
+//var user = require('../../models/user')
+//
+
+//var factory = factory-girl.factory
 
 module.exports = function(models) {
 
