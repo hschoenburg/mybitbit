@@ -4,7 +4,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var Sequelize = require('sequelize');
 
 var app = express();
 
@@ -13,25 +12,22 @@ var dotenv = require('dotenv').config()
 var passport = require('passport');
 
 require('./config/passport')(passport);
+app.use(passport.initialize());
+
 require('./routes/index')(app, {});
 require('./routes/auth')(app, passport);
 
 //app.use(express.session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
-app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
 var dotenv = require('dotenv');
 
-sequelize.authenticate().
-  then(function(err) {
-    console.log('DB connected')
-  }).catch(function(err) {
-    console.log(err);
-  })
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
+
+// BOILER FROM HERE DOWN
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

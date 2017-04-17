@@ -1,6 +1,6 @@
 // config/passport.js
 
-var models = require('../db/models/index')
+var models = require('../models/index')
 
 var FacebookStrategy = require('passport-facebook').Strategy;
 
@@ -20,31 +20,32 @@ module.exports = function(passport) {
         });
     });
     
-    // code for login (use('local-login', new LocalStategy))
-    // code for signup (use('local-signup', new LocalStategy))
-
     // =========================================================================
     // FACEBOOK ================================================================
     // =========================================================================
-  /*
     passport.use(new FacebookStrategy({
 
         // pull in our app id and secret from our auth.js file
         clientID        : process.env.FB_ID,
         clientSecret    : process.env.FB_SECRET,
         callbackURL     : process.env.FB_CALLBACK,
+        profileFields   : ['id', 'emails', 'name']
 
     },
 
     // facebook will send back the token and profile
     function(token, refreshToken, profile, done) {
-
-    console.log('fb Callback stuff? I think');
-    return done();
-  /*
-        // asynchronous
-        process.nextTick(function() {
-
+      return done(null, {id: 1})
+      // Notes
+      // Try to look up the user in the database, then sign them in
+      // If you cant find them,
+      // Create a lib object user_creator.js that takes the fb data and saves the user to the db
+      // Probably sends a confirmation email as well, validates data etc.
+      // Mock the FB data and unit test the user_creator.js
+    }
+  ))
+}
+          /*
             // find the user in the database based on their facebook id
             User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
 
@@ -82,4 +83,3 @@ module.exports = function(passport) {
     }));
 
   */
-};
