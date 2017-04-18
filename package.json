@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "bcrypt": "^1.0.2",
+    "bluebird": "^3.5.0",
     "body-parser": "~1.17.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
@@ -24,6 +25,7 @@
     "umzug": "^1.11.0"
   },
   "devDependencies": {
-    "factory-girl": "^4.2.2"
+    "factory-girl": "^4.2.2",
+    "node-mocks-http": "^1.6.1"
   }
 }

@@ -1,14 +1,16 @@
-
+var models = require('../../models/index')
 
 beforeEach(function(done) {
-
-  console.log("BEFORE")
-
-  done();
+  if(process.env.NODE_ENV === 'test') {
+    models.User.destroy({truncate: true, restartIdentity: true }).then(function() {
+      done();
+    })
+  } else {
+    done();
+  }
 })
 
 afterEach(function(done) {
-  console.log("AFTER")
     done();
 })
 
