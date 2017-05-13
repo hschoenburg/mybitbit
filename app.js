@@ -11,15 +11,8 @@ var dotenv = require('dotenv').config()
 
 var passport = require('passport');
 var helmet = require('helmet');
-
-require('./config/passport')(passport);
-app.use(passport.initialize());
-
-require('./routes/index')(app, {});
-require('./routes/auth')(app, passport);
-
-//app.use(express.session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
-app.use(passport.session()); // persistent login sessions
+var session = require('express-session')
+var FileStore = require('session-file-store')(session);
 
 var dotenv = require('dotenv');
 
@@ -27,17 +20,33 @@ var dotenv = require('dotenv');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-
-// BOILER FROM HERE DOWN
-
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
+app.use(cookieParser())
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(helmet())
+
+app.use(session({
+  secret: 'errmergerhd',
+  resave: false,
+  saveUninitialized: false,
+  store: new FileStore(),
+}))
+
+require('./config/passport')(passport);
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+
+
+//app.use(cookieParser());
+app.use(helmet());
 app.use(express.static(path.join(__dirname, 'public')));
+
+require('./routes/index')(app, {});
+require('./routes/auth')(app, passport);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

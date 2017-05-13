@@ -13,6 +13,7 @@
     "debug": "~2.6.3",
     "dotenv": "^4.0.0",
     "express": "~4.15.2",
+    "express-session": "^1.15.2",
     "factory-girl": "^4.2.2",
     "helmet": "^3.6.0",
     "morgan": "~1.8.1",
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "factory-girl": "^4.2.2",
-    "node-mocks-http": "^1.6.1"
+    "node-mocks-http": "^1.6.1",
+    "session-file-store": "^1.0.0"
   }
 }

@@ -12,6 +12,13 @@ module.exports = function(app, passport) {
       })
   );
 
+  app.get('/auth/logout', function(req, res, next) {
+    req.session.destroy(function(err) {
+      if(err) { throw err; }
+      res.redirect('/')
+    })
+  })
+
   app.get('/fbsuccess', function(req, res, next) {
     res.send("FB SUCCESS")
   })

@@ -9,16 +9,15 @@ module.exports = function(passport) {
 
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
-        done(null, user.id);
+        done(null, user);
     });
 
     // used to deserialize the user
-    passport.deserializeUser(function(id, done) {
-      models.user.findById({ where: { id: id }}).
+    passport.deserializeUser(function(user, done) {
+      models.User.findById(user.id).
         then(function(user) {
-          if(!user) { done("USER NOT FOUND") }
-            done(user);
-        });
+          done(null, user);
+        }).catch(function(err) { done(err, null)})
     });
     
     // =========================================================================
