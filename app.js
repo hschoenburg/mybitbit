@@ -10,6 +10,7 @@ var app = express();
 var dotenv = require('dotenv').config()
 
 var passport = require('passport');
+var helmet = require('helmet');
 
 require('./config/passport')(passport);
 app.use(passport.initialize());
@@ -35,6 +36,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(helmet())
 app.use(express.static(path.join(__dirname, 'public')));
 
 // catch 404 and forward to error handler

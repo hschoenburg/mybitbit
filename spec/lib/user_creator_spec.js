@@ -10,7 +10,8 @@ var creator = require('../../lib/user_creator')
 describe('create_from_facebook', function() {
 
   var mock_fb_data = {
-    email: 'pam@stellar.org'
+    email: 'pam@stellar.org',
+    facebook_id: 234234
   }
 
   it('takes fb_data and returns a user', function(done) {
