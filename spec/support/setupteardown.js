@@ -1,10 +1,18 @@
 var models = require('../../models/index')
 
+var Promise = require('bluebird')
+
 beforeAll(function(done) {
   if(process.env.NODE_ENV === 'test') {
-    models.User.destroy({truncate: true, restartIdentity: true }).then(function() {
-      done();
-    })
+
+    Promise.join(
+    models.User.destroy({truncate: true, restartIdentity: true }),
+      models.Debit.destroy({truncate: true}),
+      models.Credit.destroy({truncate: true}),
+      function(stuff) {
+        done();
+      }
+    )
   } else {
     done();
   }
