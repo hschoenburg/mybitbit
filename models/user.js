@@ -13,6 +13,8 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
+        User.hasMany(models.Debit, { foreignKey: 'user_id' }),
+        User.hasMany(models.Credit, { foreignKey: 'user_id' })
       },
     },
     instanceMethods: {
@@ -28,3 +30,4 @@ module.exports = function(sequelize, DataTypes) {
   });
   return User;
 };
+
