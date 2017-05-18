@@ -1,6 +1,7 @@
 var request = require('request');
 var Promise = require('bluebird');
 var StellarSdk = require('stellar-sdk');
+StellarSdk.Network.useTestNetwork();
 
 var server = new StellarSdk.Server('https://horizon-testnet.stellar.org');
 
@@ -23,36 +24,37 @@ exports.sendXLM = function(opts) {
 
   .then(function(destinationAccount) {
     //console.log(destinationAccount._baseAccount._accountId)
-    return server.loadAccount(opts.pair.publicKey())
-
+    return server.loadAccount(opts.senderId)
   })
 
   .catch(StellarSdk.NotFoundError, function(error) {
     throw new Error('Source account does not exist' + error) 
   })
+
   .then(function(sourceAccount) {
 
     var txn = new StellarSdk.TransactionBuilder(sourceAccount) 
       .addOperation(StellarSdk.Operation.payment({
         destination: opts.destinationId,
         asset: StellarSdk.Asset.native(),
-        amount: "10"
+        amount: "100"
       }))
       
-    //.addMemo(StellarSdk.memo.text('Test '))
-      .build();
+    .addMemo(StellarSdk.Memo.text('Test '))
+    .build();
 
-    //txn.sign(opts.pair)
+    txn.sign(opts.pair)
 
-    //return server.submitTransaction(txn)
+    return server.submitTransaction(txn)
 
-    return new Promise(function(fullfill, reject) { fulfill('hey') })
   })
 
   .then(function(result) {
     console.log('Success! Results:', result);
     })
   .catch(function(error) {
+    throw error
+    console.log(error);
     throw new Error('Something wrong with Txn', error);
     });
 }

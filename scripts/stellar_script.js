@@ -15,11 +15,12 @@ var testSecretOne = 'SC2EPWKXJVFVFQIGWIJQUKBC3DS7NZ3Z7OLHKYOCHMKWLP4BM3JBU2YK'
 var testSecretTwo = 'SBBMTA4DQNRNNH24DPSUOFHKOLM6QTHNHNALH2NPJKDGEJTT6ZJR7RN7'
 
 
-//StellarBit.showBalance(testPubOne);
+StellarBit.showBalance(testPubOne);
 //console.log("$$$$$$$$$$$$");
-//return StellarBit.showBalance(testPubTwo);
+return StellarBit.showBalance(testPubTwo);
 var pair = StellarSdk.Keypair.fromSecret(testSecretOne)
-StellarBit.sendXLM({ destinationId: testPubTwo, pair: pair})
+//console.log('sending XLM')
+//return StellarBit.sendXLM({ senderId: testPubOne, destinationId: testPubTwo, pair: pair})
 
 
 
