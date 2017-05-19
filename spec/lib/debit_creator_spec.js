@@ -1,6 +1,6 @@
 var helpers = require('../support/helpers')
 
-var creator = require('../../lib/debit_creator')
+var creator = require('../../lib/creators/debit_creator')
 var models = helpers.models
 
 

@@ -30,6 +30,7 @@
   "devDependencies": {
     "factory-girl": "^4.2.2",
     "node-mocks-http": "^1.6.1",
-    "session-file-store": "^1.0.0"
+    "session-file-store": "^1.0.0",
+    "supertest": "^3.0.0"
   }
 }

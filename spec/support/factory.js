@@ -15,6 +15,21 @@ module.exports = function(models) {
     email:      "goog@hammer.com"
   })
 
+  factory.define('debit', models.Debit, { 
+    usd_amount: 100,
+    xlm_amount: 999,
+    php_amount: 888,
+    user_id:    8,
+    recipient_address: 'hans@hans.com'
+  })
+
+ factory.define('credit', models.Credit, { 
+    usd_amount: 10,
+    source: 'stripe',
+    user_id: 1
+
+ })
+
   return factory;
 
 }

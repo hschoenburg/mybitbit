@@ -1,6 +1,6 @@
 var helpers = require('../support/helpers')
 
-var creator = require('../../lib/credit_creator')
+var creator = require('../../lib/creators/credit_creator')
 var models = helpers.models
 
 

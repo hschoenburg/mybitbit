@@ -1,5 +1,5 @@
 
-module.exports = function(app, passport, models) {
+module.exports = function(app, passport) {
 
 	app.get('/', function(req, res, next) {
 		res.render('index', { title: 'My BitBit', user: req.user})

@@ -13,6 +13,7 @@ var passport = require('passport');
 var helmet = require('helmet');
 var session = require('express-session')
 var FileStore = require('session-file-store')(session);
+var models = require('./models/index');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -41,10 +42,12 @@ app.use(passport.session()); // persistent login sessions
 app.use(helmet());
 app.use(express.static(path.join(__dirname, 'public')));
 
-require('./routes/index')(app, {});
+require('./routes/user')(app);
+require('./routes/index')(app, passport);
 require('./routes/auth')(app, passport);
-
-
+require('./routes/account')(app);
+require('./routes/debit')(app);
+require('./routes/credit')(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

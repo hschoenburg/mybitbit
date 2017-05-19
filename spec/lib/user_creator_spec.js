@@ -1,11 +1,6 @@
 var helpers = require('../support/helpers')
 
-//helpers.factory
-//helpers.models
-
-
-var creator = require('../../lib/user_creator')
-
+var creator = require('../../lib/creators/user_creator')
 
 describe('create_from_facebook', function() {
 
@@ -32,7 +27,6 @@ describe('create_from_facebook', function() {
         done();
       })
   })
-
 
 });
 
