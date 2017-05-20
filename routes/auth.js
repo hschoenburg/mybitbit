@@ -1,16 +1,36 @@
+var models = require('../models/index')
+var creators = require('../lib/creators/index')
 
-module.exports = function(app, passport) {
+module.exports = function(app) {
 
-  // send to facebook to do the authentication
-  app.get('/auth/facebook', passport.authenticate('facebook', { scope : ['email'] }));
+  app.post('/auth/facebook', function(req, res, next) {
 
-  // handle the callback after facebook has authenticated the user
-  app.get('/auth/facebook/callback',
-      passport.authenticate('facebook', {
-          successRedirect : '/',
-          failureRedirect : '/fbfail'
-      })
-  );
+    var profile = req.body.profile;
+    var token = req.body.token;
+
+    models.User.findAll({where: { facebook_id: profile.id, email: profile.email } }).then(function(user) {
+      if(user.email) {
+        console.log("FOUND THE USER");
+        console.log(user);
+        res.json('hey');
+      } else {
+        console.log('NO USER FOUND INSERTING NEW USER')
+
+        creators.user.create_from_facebook({
+          email:          profile.email,
+          facebook_id:    profile.id,
+          first_name:     profile.first_name,
+          last_name:      profile.last_name,
+          facebook_token: token
+        }).then(function(newUser) {
+          res.json('hey');
+        }).catch(function(err) {
+          res.send(err)
+        })
+      }
+    })
+  })
+
 
   app.get('/auth/logout', function(req, res, next) {
     req.session.destroy(function(err) {
@@ -18,14 +38,4 @@ module.exports = function(app, passport) {
       res.redirect('/')
     })
   })
-
-  app.get('/fbsuccess', function(req, res, next) {
-    res.send("FB SUCCESS")
-  })
-
-  app.get('/fbfail', function(req, res, next) {
-    res.send('FB FAIL');
-    console.log("FACEBOOK FAIL")
-  })
-
 }
