@@ -17,12 +17,18 @@ $(document).ready(function() {
 
   hello.on('auth.login', function(auth) {
     hello(auth.network).api('me').then(function(profile) {
+      profile.facebook_id = profile.id
+      profile.token = auth.authResponse.access_token
       console.log(profile)
       request
         .post('/auth/facebook')
+        .set('Accept', 'application/json')
         .send({
-          token: auth.authResponse.access_token,
           profile: profile
+        })
+        .end(function(err, res) {
+          console.log(res);
+
         })
     })
 

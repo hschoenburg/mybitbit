@@ -1,4 +1,5 @@
 var models = require('../../models/index')
+var dotenv = require('dotenv').config({path: '../../.env'})
 
 var Promise = require('bluebird')
 
