@@ -1,6 +1,11 @@
+var hello = require('hellojs')
+var request = require('superagent')
+var $ = require('jquery')
 
 $(document).ready(function() {
-  console.log("hey whats up")
+
+  $('#omg').click(function(e) { console.log('yoyoyo') })
+
 
   hello.init({
     facebook: "1754938408152723"
@@ -10,7 +15,6 @@ $(document).ready(function() {
 
   $('#fb-login').click(function(e) {
     e.preventDefault();
-    console.log('whoah');
     hello('facebook').login()
 
   })
@@ -28,7 +32,6 @@ $(document).ready(function() {
         })
         .end(function(err, res) {
           console.log(res);
-
         })
     })
 

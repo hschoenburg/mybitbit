@@ -3,3 +3,4 @@ bower_components/
 .env
 sessions/
 todo.txt
+public/javascripts/client_bundle.js

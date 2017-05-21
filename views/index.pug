@@ -1,22 +1,12 @@
 extends layout
 
-
 block content
-  script(src="https://code.jquery.com/jquery-3.2.1.min.js")
-  script(src="javascripts/basic.js")
-  script(src="https://cdnjs.cloudflare.com/ajax/libs/superagent/3.5.2/superagent.js")
-  script(src='javascripts/https://cdnjs.cloudflare.com/ajax/libs/hellojs/1.14.1/hello.all.js')
 
   h1= title
   p Welcome to #{title}
-
-  p Unknown!
 
   .logout
     a(href="/auth/logout") Logout
 
   .login
     a#fb-login(href="#") Login with Facebook
-
-
-
