@@ -1,3 +1,16 @@
+// Dependencies
+ import React from 'react';  
+ import ReactDOM from 'react-dom';
+
+ // Components
+import App from './components/App.jsx';
+
+ // Styles
+import './index.scss';
+
+ReactDOM.render(<App />, document.getElementById('app-root'));  
+
+
 var hello = require('hellojs')
 var request = require('superagent')
 var $ = require('jquery')
@@ -37,4 +50,3 @@ $(document).ready(function() {
 
   })
 })
-
