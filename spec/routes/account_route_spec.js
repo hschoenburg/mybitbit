@@ -27,7 +27,7 @@ describe('request without valid token', function() {
   
 describe('account/balance/:user_id', function() {
 
-  beforeAll(function(done) {
+  beforeEach(function(done) {
     factory.create('user').then(function(new_user) {
       user = new_user;
 
