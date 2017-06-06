@@ -15,7 +15,7 @@ var profile_data = {
   name: "Hands Shownborg", 
   timezone: -6, 
   verified: true, 
-  facebook_id: "9823983",
+  facebook_id: "982398329847293478",
   facebook_token: 'blahblahblah',
   picture: "https://graph.facebook.com/10101583…", 
   thumbnail: "https://graph.facebook.com/10101583…"
@@ -68,6 +68,22 @@ describe('auth/facebook Log In', function() {
     })
   })
 
+  fit('should not create a new user for the same facebook id', function(done) {
+
+
+    request(app)
+      .post('/auth/facebook/')
+      .send( {profile: profile_data} )
+      .end(function(err, res) {
+
+        models.User.findAll({where: {facebook_token: profile_data.facebook_token}}).then(function(new_users) {
+          expect(new_users.length).toEqual(1);
+          done();
+        })
+      })
+
+  })
+
   it('should look up the user and respond with a valid jwt', function(done) {
     request(app)
       .post('/auth/facebook/')
@@ -80,5 +96,16 @@ describe('auth/facebook Log In', function() {
         })
       })
   })
-})
 
+  it('should respond with a token and a user_id', function(done) {
+    request(app)
+      .post('/auth/facebook/')
+      .send( {profile: profile_data} )
+      .end(function(err, res) {
+        expect(res.statusCode).toEqual(200)
+        expect(res.body.token).not.toBe(undefined)
+        expect(res.body.user_id).not.toBe(undefined)
+        done()
+      })
+  })
+})

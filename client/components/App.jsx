@@ -1,21 +1,36 @@
-import React from 'react';
 
-//import Hello from 'hellojs';
-
-//import request from 'superagent';
+import React, { Component,  PropTypes }  from 'react';
 
 import './App.scss';  
 
-import Header from './header/Header.jsx';
+import User from './User'
 
-var App = function() {
+class App extends Component {  
+  constructor() {
+    super();
+
+    this.state = {
+      jwt: '',
+      user_id: ''
+    }
+  }
+
+  updateAuthData(auth) {
+    this.setState(Object.assign({}, this.state, auth))
+  }
+    
+
+  render() {
     return (
       <div className='wrapper'>
-        <Header />
+        <p> Ok lets get this party started</p>
+        <p>user_id: {this.state.user_id}</p>
+        <p>jwt: { this.state.jwt} </p>
+        <User userId={this.state.user_id} updateAuthData={this.updateAuthData.bind(this)} />
       </div>
-  );
+    );
+  }
 }
-
 export default App;
 
 

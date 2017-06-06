@@ -10,16 +10,17 @@ module.exports = function(app) {
 
     models.User.findAll({where: { facebook_id: profile.facebook_id, email: profile.email } }).then(function(user) {
 
-      if(user.email) {
+      if(user[0].facebook_id) {
         jwt.createJwt(profile).then(function(jwt) {
-          res.json({token: jwt })
+          res.json({token: jwt, user_id: user[0].id})
         })
       } else {
-
+        var savedNewUser;
         creators.user.create_from_facebook(profile).then(function(newUser) {
+          savedNewUser = newUser;
           return jwt.createJwt(profile)
         }).then(function(jwt) {
-            res.json({token: jwt })
+            res.json({token: jwt, user_id: savedNewUser.id})
         }).catch(function(err) {
           throw err;
           res.send(err)
