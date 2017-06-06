@@ -1,6 +1,6 @@
-var helpers = require('../support/helpers')
+var helpers = require('../../support/helpers')
 
-var creator = require('../../lib/creators/user_creator')
+var creator = require('../../../lib/creators/user_creator')
 
 describe('create_from_facebook', function() {
 

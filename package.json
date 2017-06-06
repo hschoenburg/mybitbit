@@ -47,6 +47,7 @@
     "babel-register": "^6.24.1",
     "css-loader": "^0.28.1",
     "factory-girl": "^4.2.2",
+    "jasmine": "^2.6.0",
     "node-mocks-http": "^1.6.1",
     "node-sass": "^4.5.3",
     "sass-loader": "^6.0.5",

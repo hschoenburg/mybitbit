@@ -1,6 +1,6 @@
-var helpers = require('../support/helpers')
+var helpers = require('../../support/helpers')
 
-var creator = require('../../lib/creators/debit_creator')
+var creator = require('../../../lib/creators/debit_creator')
 var models = helpers.models
 
 
@@ -14,7 +14,7 @@ describe('create for transaction', function() {
   
   var recipient = "GCS54VO62JYX646ULIBT5CMPRM5PV64BHGOGZHSP33XJVPB5UFJNKN65";
   
-  beforeAll(function(done) {
+  beforeEach(function(done) {
     helpers.factory.create('user').then(function(new_user) {
       user =  new_user;
       done()

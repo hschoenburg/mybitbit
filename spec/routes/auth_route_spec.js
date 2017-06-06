@@ -60,7 +60,7 @@ describe('auth/facebook Log In', function() {
 
   var user;
 
-  beforeAll(function(done) {
+  beforeEach(function(done) {
 
     creators.user.create_from_facebook(profile_data).then(function(new_user) {
       user = new_user;
@@ -68,7 +68,7 @@ describe('auth/facebook Log In', function() {
     })
   })
 
-  fit('should not create a new user for the same facebook id', function(done) {
+  it('should not create a new user for the same facebook id', function(done) {
 
 
     request(app)
@@ -76,8 +76,8 @@ describe('auth/facebook Log In', function() {
       .send( {profile: profile_data} )
       .end(function(err, res) {
 
-        models.User.findAll({where: {facebook_token: profile_data.facebook_token}}).then(function(new_users) {
-          expect(new_users.length).toEqual(1);
+        models.User.findAll({where: {facebook_token: profile_data.facebook_token}}).then(function(existing_user) {
+          expect(existing_user.length).toEqual(1);
           done();
         })
       })

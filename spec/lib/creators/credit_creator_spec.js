@@ -1,6 +1,6 @@
-var helpers = require('../support/helpers')
+var helpers = require('../../support/helpers')
 
-var creator = require('../../lib/creators/credit_creator')
+var creator = require('../../../lib/creators/credit_creator')
 var models = helpers.models
 
 
@@ -12,7 +12,7 @@ describe('create for reward', function() {
 
   var user;
   
-  beforeAll(function(done) {
+  beforeEach(function(done) {
     helpers.factory.create('user').then(function(new_user) {
       user =  new_user;
       done()
@@ -33,7 +33,6 @@ describe('create for reward', function() {
 
   it('should belong to the user', function(done) {
     creator.createForReward(5, user.id).then(function(credit) {
-      console.log(user.id)
       return models.User.findAll({where: {id: user.id }, include: [ {model: models.Credit} ]})
 
     }).then(function(q_user) {
