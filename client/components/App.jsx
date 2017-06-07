@@ -5,6 +5,8 @@ import './App.scss';
 
 import User from './User'
 
+import Recipients from './Recipients'
+
 class App extends Component {  
   constructor() {
     super();
@@ -27,6 +29,7 @@ class App extends Component {
         <p>user_id: {this.state.user_id}</p>
         <p>jwt: { this.state.jwt} </p>
         <User userId={this.state.user_id} updateAuthData={this.updateAuthData.bind(this)} />
+        <Recipients userId={this.state.user_id} token={this.state.jwt}/>
       </div>
     );
   }
