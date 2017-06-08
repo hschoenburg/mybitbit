@@ -91,7 +91,7 @@ describe('auth/facebook Log In', function() {
       .end(function(err, res) {
         expect(res.statusCode).toEqual(200)
         jwt.verifyJwt(res.body.token).then(function(token_data) {
-          expect(token_data.email).toEqual(profile_data.email)
+          expect(token_data.profile.email).toEqual(profile_data.email)
           done();
         })
       })

@@ -11,7 +11,7 @@ module.exports = function(app) {
     models.User.findAll({where: { facebook_id: profile.facebook_id, email: profile.email } }).then(function(user) {
 
       if(user.length > 0) {
-        jwt.createJwt(profile).then(function(jwt) {
+        jwt.createJwt({profile: profile, user_id: user[0].id }).then(function(jwt) {
           res.json({token: jwt, user_id: user[0].id})
         })
       } else {

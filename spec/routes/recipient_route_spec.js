@@ -24,7 +24,6 @@ describe('POST a new recipient', function() {
           phone: 4783920,
           email: '',
           name: "Bob in Manilla",
-          sender_id: user.id
         }
         done();
       })
@@ -60,7 +59,7 @@ describe('POST a new recipient', function() {
 
 describe('GET recipients', function() {
 
-  var user, token;
+  var user, token, recipient;
 
   beforeEach(function(done) {
 
@@ -76,7 +75,8 @@ describe('GET recipients', function() {
           name: "Bob in Manilla",
           sender_id: user.id
         })
-      }).then(function(recipient) {
+      }).then(function(new_recipient) {
+        recipient = new_recipient;
         done();
       }).catch(function(err) { throw err; })
     })
@@ -88,6 +88,7 @@ describe('GET recipients', function() {
       .end(function(err, res) {
         expect(res.statusCode).toEqual(200)
         expect(res.body.recipients[0].sender_id).toEqual(user.id)
+        expect(res.body.recipients[0].name).toEqual("Bob in Manilla")
         done()
       })
     })

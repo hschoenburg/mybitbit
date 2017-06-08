@@ -1,4 +1,6 @@
 import React, { Component,  PropTypes }  from 'react';
+import 'whatwg-fetch'
+
 
 class RecipientsForm extends Component {  
 
@@ -15,15 +17,33 @@ class RecipientsForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-		handleChange(event) {
-			this.setState({[event.target.name]: event.target.value})
-		}
+  handleChange(event) {
+    this.setState({[event.target.name]: event.target.value})
+  }
 
-		handleSubmit(event) {
-			console.log('Form submitted!' + this.state)
-			event.preventDefault();
-      this.props.pushNewRecipient(this.state)
-		}
+  handleSubmit(event) {
+    event.preventDefault();
+    var that = this;
+    fetch('/recipients', {
+      method: 'POST',
+      headers: {
+          'x-api-token': this.props.token,
+          'Content-Type': 'application/json'
+        },
+      body: JSON.stringify({ recipient: this.state })
+
+    }).then(function(response){
+      console.log(response);
+      if(response.ok) {
+        // TODO pushing the entire state array feels ugly......
+        that.props.pushNewRecipient(that.state)
+      }
+    }).catch(function(err) {
+      console.log(err);
+      return false;
+    })
+        
+  }
 
 
   render() {

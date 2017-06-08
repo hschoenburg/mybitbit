@@ -7,7 +7,8 @@ class RecipientsList extends Component {
 
   render() {
     let list = this.props.recipients.map((item) => {
-      return <Recipient name={item.name} phone={item.phone} key={item.phone}/>
+      // TODO more elegant and collision resistant key scheme
+      return <Recipient name={item.name} phone={item.phone} key={item.phone + item.name}/>
     })
     return (
     <div className='recipients-list'>
