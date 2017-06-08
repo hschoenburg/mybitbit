@@ -8,8 +8,10 @@ module.exports = function(sequelize, DataTypes) {
     redeemed: DataTypes.BOOLEAN
   }, {
     classMethods: {
+        // associations can be defined here
       associate: function(models) {
         // associations can be defined here
+        Verif.belongsTo(models.Recipient, { foreignKey: 'recipient_id' })
       }
     }
   });

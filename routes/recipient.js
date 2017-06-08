@@ -5,7 +5,6 @@ var apiAuth = require('../lib/api_auth')
 module.exports = function(app) {
 
   app.get('/recipients', apiAuth.jwtAuthCheck, function(req, res, next) {
-    console.log('$$$$$$$$$$$$$$$$$$$$$' + req.user.id);
 
     models.Recipient.findAll({where: {sender_id: req.user.id}}).then(function(recipients) {
       res.status(200)

@@ -18,6 +18,10 @@ module.exports = function(app) {
         var savedNewUser;
         creators.user.create_from_facebook(profile).then(function(newUser) {
           savedNewUser = newUser;
+
+          // Create $1 Signup Credit
+          return creators.credit.createForReward(1, newUser.id)
+        }).then(function(credit) {
           return jwt.createJwt(profile)
         }).then(function(jwt) {
             res.json({token: jwt, user_id: savedNewUser.id})

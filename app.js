@@ -49,6 +49,7 @@ require('./routes/account')(app);
 require('./routes/debit')(app);
 require('./routes/credit')(app);
 require('./routes/recipient')(app);
+require('./routes/verif')(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

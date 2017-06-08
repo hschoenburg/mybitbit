@@ -41,13 +41,46 @@ describe('auth/facebook Sign Up', function() {
       })
     })
 
-  it('should respond with a jwt', function(done) {
+  it('should grant the user $1 in Credit', function(done) {
 
     request(app)
       .post('/auth/facebook/')
       .send( {profile: profile_data} )
       .end(function(err, res) {
         expect(res.statusCode).toEqual(200)
+        done()
+
+      })
+  })
+
+  it('should send the user a verification email', function(done) {
+
+
+    request(app)
+      .post('/auth/facebook/')
+      .send( {profile: profile_data} )
+      .end(function(err, res) {
+        expect(res.statusCode).toEqual(200)
+        models.Credit.findAll({where: {user_id: res.body.user_id}})
+        .then(function(credits) {
+
+          var total = credits.reduce(function(total, item) { return total + item.usd_amount }, 0)
+          expect(total).toEqual(1)
+            done()
+        }).catch(function(err) {
+          console.log(err)
+        })
+      })
+  })
+
+  it('should respond with a jwt and user_id', function(done) {
+
+    request(app)
+      .post('/auth/facebook/')
+      .send( {profile: profile_data} )
+      .end(function(err, res) {
+        expect(res.statusCode).toEqual(200)
+        expect(res.body.user_id).toBeGreaterThan(0)
         jwt.verifyJwt(res.body.token).then(function(token_data) {
           expect(token_data.email).toEqual(profile_data.email)
           done();
