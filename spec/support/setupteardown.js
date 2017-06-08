@@ -3,7 +3,7 @@ var dotenv = require('dotenv').config({path: '../../.env'})
 
 var Promise = require('bluebird')
 
-afterEach(function(done) {
+beforeEach(function(done) {
   if(process.env.NODE_ENV === 'test') {
 
     Promise.join(
@@ -11,6 +11,7 @@ afterEach(function(done) {
       models.Debit.destroy({truncate: true}),
       models.Credit.destroy({truncate: true}),
       models.Recipient.destroy({truncate: true}),
+      models.Verif.destroy({truncate: true}),
       function(stuff) {
         done();
       }

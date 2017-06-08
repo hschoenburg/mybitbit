@@ -25,6 +25,20 @@ module.exports = function(app) {
 
   })
 
+  app.post('/verifs/send', function(req, res, next) {
+    console.log('$$$$$$')
+      models.Verif.findAll({where: { recipient_id: req.body.recipient_id, sent_at: null}}).then(function(verifs) {
+        verifs[0].sent_at = Date.now();
+
+        verifs[0].save().then(function(v) {
+
+          res.send('All verifs resent successfully!')
+        })
+    })
+
+  })
+
+
     /*
     models.Recipient.findAll({where: {sender_id: req.user.id}}).then(function(recipients) {
       res.status(200)
