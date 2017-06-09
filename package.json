@@ -7,7 +7,7 @@
     "webpack": "./node_modules/.bin/webpack-dev-server"
   },
   "engines": {
-    "node": "6.1.1"
+    "node": "6.9.4"
   },
   "dependencies": {
     "babel-polyfill": "^6.23.0",
