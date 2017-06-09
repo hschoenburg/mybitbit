@@ -9,7 +9,6 @@ var app = express();
 
 var dotenv = require('dotenv').config()
 
-var passport = require('passport');
 var helmet = require('helmet');
 var session = require('express-session')
 var FileStore = require('session-file-store')(session);
@@ -33,18 +32,13 @@ app.use(session({
   store: new FileStore(),
 }))
 
-require('./config/passport')(passport);
-app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-
-
 //app.use(cookieParser());
 app.use(helmet());
 app.use(express.static(path.join(__dirname, 'public')));
 
 require('./routes/user')(app);
-require('./routes/index')(app, passport);
-require('./routes/auth')(app, passport);
+require('./routes/index')(app);
+require('./routes/auth')(app);
 require('./routes/account')(app);
 require('./routes/debit')(app);
 require('./routes/credit')(app);

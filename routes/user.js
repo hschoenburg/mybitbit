@@ -1,6 +1,6 @@
 models = require('../models/index')
 
-module.exports = function(app, passport) {
+module.exports = function(app) {
 
         // typically we might sanity check that user_id is of the right format
       //   UserDatabase.find(user_id, function(err, user) {

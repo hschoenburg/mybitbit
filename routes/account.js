@@ -1,7 +1,7 @@
 var userUtils = require('../lib/user_utils')
 var apiAuth = require('../lib/api_auth')
 
-module.exports = function(app, passport) {
+module.exports = function(app) {
 
   app.get('/account/balance/:user_id', apiAuth.jwtAuthCheck, function(req, res, next) {
 

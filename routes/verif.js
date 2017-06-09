@@ -43,8 +43,7 @@ module.exports = function(app) {
             sandbox: true,
           },
           content: {
-
-            from: 'testing@sparkpostbox.com',
+            from: 'hans@mybitbit.com',
             subject: 'Someone Wants to send you PHP',
             html: '<html><body><p> Please verify your email address by clicking on this link</p>'+ verif_link + '</body></html>',
           },
