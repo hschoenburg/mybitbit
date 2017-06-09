@@ -30,21 +30,19 @@ class User extends Component {
           <UserProfile profileData={this.state.profileData}/>
         </div>
       )
-    } else {
-
-      userDetails = (
-        <div className='userDetails'>
-          <UserAuth updateProfileData={this.updateProfileData.bind(this)}
-                    updateAuthData={this.updateAuthData.bind(this)}
-                  />
-        </div>
-      )
     }
+
 
     return (
       <div className='user'>
         <p>Here is the User Details Box for User {this.props.userId}</p>
         {userDetails}
+         <div className='userDetails'>
+          <UserAuth userId={this.props.userId} updateProfileData={this.updateProfileData.bind(this)}
+                    updateAuthData={this.updateAuthData.bind(this)}
+                  />
+        </div>
+
       </div>
     );
   }

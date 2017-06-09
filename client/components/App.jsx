@@ -17,12 +17,22 @@ class App extends Component {
     }
   }
 
+  componentDidMount() {
+    // Need to rethink/rebuild login flow
+    // Persist token in sessionStorage,
+    // or query for profile data from server... probably not
+    // anyway figure it out later
+
+
+  }
+
   //TO DO Save JWT in Local Storage
   //$window.sessionStorage.accessToken = response.body.access_token;
   //Then don't load Login/Signup button if Token is valid.
   //Maybe just run an API check on the token?
 
   updateAuthData(auth) {
+    window.sessionStorage.auth = auth;
     this.setState(Object.assign({}, this.state, auth))
   }
     

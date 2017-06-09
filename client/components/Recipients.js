@@ -46,7 +46,7 @@ class Recipients extends Component {
     return (
       <div className='recipients'>
         <RecipientsForm user_id={this.props.user_id} token={this.props.token} pushNewRecipient={this.pushNewRecipient.bind(this)}/>
-        <RecipientsList recipients={this.state.recipients}/>
+        <RecipientsList recipients={this.state.recipients} token={this.props.token}/>
       </div>
     )
   }

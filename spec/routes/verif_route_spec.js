@@ -52,17 +52,18 @@ describe('/verifs', function() {
 
   describe('verifs/send', function() {
 
-    fit('sends the verif', function(done) {
+    fit('sends the verif and updates sent_at', function(done) {
+      var Sparky = require('sparkpost')
+      var sparkPost = new Sparky(process.env.SPARKPOST_KEY).transmissions;
 
-      // var sdk = require sdk
-      //  spyOn(sdk, 'method_name').and.callThrough()
-      //expect sdk.method_name.toHaveBeenCalled()
+      spyOn(sparkPost, 'send').and.callThrough()
 
       request(app)
         .post('/verifs/send')
         .send({recipient_id: recipient.id})
         .end(function(err, res) {
 
+          expect(sparkPost.send).toHaveBeenCalled()
           models.Verif.findAll({where: {recipient_id: recipient.id}}).then(function(verif) {
             expect(verif[0].sent_at).not.toBe(null)
             done()

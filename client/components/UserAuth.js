@@ -13,6 +13,12 @@ class UserAuth extends Component {
     })
   }
 
+  fbLogoutUser(e) {
+    // delete token from LocalStorage
+    // and remove it from App.js using props function
+    // this.props.logoutUser
+  }
+
   fbAuthUser(e) {
     e.preventDefault();
 
@@ -45,12 +51,29 @@ class UserAuth extends Component {
 
 
   render() {
-    return (
+    let Button;
+
+    if(this.props.userId) {
+
+      Button = (
+        <div className='logout-button'>
+          <a href='#' onClick={this.fbLogoutUser.bind(this)} >
+            Logout
+          </a>
+        </div>
+      )
+    } else {
+      Button = (
       <div className='login-button'>
         <a href='#' onClick={this.fbAuthUser.bind(this)} >
           Login
         </a>
       </div>
+      )
+    }
+
+    return (
+      Button
     );
   }
 }

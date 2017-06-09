@@ -9,7 +9,8 @@ class RecipientsForm extends Component {
 
 		this.state = {
 			name: '',
-			phone: ''
+      phone: '',
+      email: ''
 		}
 			
 
@@ -57,13 +58,14 @@ class RecipientsForm extends Component {
         </label>
 
         <label>
-          Phone Number:
-          <input type="text" name='phone' value={this.state.phone} onChange={this.handleChange} />
+          Email:
+          <input type="text" name='email' value={this.state.email} onChange={this.handleChange} />
         </label>
         <input type="submit" value="Submit" />
       </form>
     </div>
     )
+
   }
 }
 

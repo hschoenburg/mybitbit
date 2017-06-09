@@ -17,7 +17,7 @@ module.exports = function(app) {
 
     creators.recipient.create_with_verifs({
       sender_id: req.user.id,
-      email: '',
+      email: data.email,
       phone: data.phone,
       name: data.name
     }).then(function(recipient) {
