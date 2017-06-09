@@ -6,6 +6,11 @@ var Sequelize = require('sequelize');
 var basename  = path.basename(module.filename);
 var env       = process.env.NODE_ENV || 'development';
 var config    = require(__dirname + '/../db/config.json')[env];
+
+if(env == 'production') {
+  config.host = process.env.DATABASE_URL
+}
+
 var db        = {};
 
 if (config.use_env_variable) {
