@@ -14,10 +14,7 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "",
-    "password": null,
-    "database": "bitbit_production",
-    "host": "",
+    "use_env_variable": "DATABASE_URL",
     "dialect": "postgres"
   }
   
