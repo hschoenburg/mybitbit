@@ -1,7 +1,8 @@
 var path = require('path');
 var webpack = require('webpack')
 
-module.exports = {
+module.exports = (env={}) => {
+  return {
    entry: './client/index.jsx',
     output: {
       filename: 'client_bundle.js',
@@ -23,7 +24,11 @@ module.exports = {
         'sass-loader'
        ]
       }
+        ]},
+    plugins: [
+      new webpack.DefinePlugin({
+          NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+      })
     ]
-  },
-};
-
+  }
+}

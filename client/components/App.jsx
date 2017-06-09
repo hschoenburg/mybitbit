@@ -18,6 +18,8 @@ class App extends Component {
   }
 
   componentDidMount() {
+    console.log(NODE_ENV)
+    console.log('$$')
     // Need to rethink/rebuild login flow
     // Persist token in sessionStorage,
     // or query for profile data from server... probably not

@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./server.js",
-    "webpack": "./node_modules/.bin/webpack-dev-server"
+    "webpack-server": "./node_modules/.bin/webpack-dev-server",
+    "webpack-build": "NODE_ENV=production ./node_modules/.bin/webpack -p --progress"
   },
   "engines": {
     "node": "6.9.4"

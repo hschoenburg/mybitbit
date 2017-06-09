@@ -6,10 +6,17 @@ class UserAuth extends Component {
   constructor() {
     super(...arguments);
 
+    var redirect;
+    if(NODE_ENV == 'production') {
+      redirect = 'https://bitbit-staging.herokuapp.com/'
+    } else {
+      redirect =  'http://localhost:3000'
+    }
+
     hello.init({
       facebook: "1754938408152723"
-      }, {
-      redirect_uri: 'http://localhost:3000'
+    }, {
+      redirect_uri: redirect
     })
   }
 

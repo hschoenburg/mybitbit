@@ -6,7 +6,7 @@ module.exports = function(app) {
     var bundle_path;
 
     if(process.env.NODE_ENV == 'development') {
-      bundle_path = 'http://localhost:8080/client_bundlessssss.js'
+      bundle_path = 'http://localhost:8080/client_bundle.js'
     } else if(process.env.NODE_ENV == 'production') {
       bundle_path = '/javascripts/client_bundle.js'
     }
