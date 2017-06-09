@@ -10,7 +10,6 @@ var app = express();
 var dotenv = require('dotenv').config()
 
 var helmet = require('helmet');
-var session = require('express-session')
 var models = require('./models/index');
 
 // view engine setup
@@ -23,13 +22,6 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(cookieParser())
 app.use(bodyParser.urlencoded({ extended: false }));
-
-app.use(session({
-  secret: 'errmergerhd',
-  resave: false,
-  saveUninitialized: false,
-  store: new FileStore(),
-}))
 
 //app.use(cookieParser());
 app.use(helmet());
