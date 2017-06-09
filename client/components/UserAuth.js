@@ -8,7 +8,7 @@ class UserAuth extends Component {
 
     var redirect;
     if(NODE_ENV == 'production') {
-      redirect = 'https://bitbit-staging.herokuapp.com/'
+      redirect = 'https://bitbit-staging.herokuapp.com'
     } else {
       redirect =  'http://localhost:3000'
     }
