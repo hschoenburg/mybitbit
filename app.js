@@ -11,7 +11,6 @@ var dotenv = require('dotenv').config()
 
 var helmet = require('helmet');
 var session = require('express-session')
-var FileStore = require('session-file-store')(session);
 var models = require('./models/index');
 
 // view engine setup
