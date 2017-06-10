@@ -16,15 +16,14 @@ describe('POST a new recipient', function() {
 
       factory.create('user').then(function(new_user) {
         user = new_user;
-        return jwt.createJwt({user_id: user.id, usd_amount: 6})
-      }).then(function(new_token) {
-        token = new_token;
       
         recipient_data = {
           phone: 4783920,
           email: '',
           name: "Bob in Manilla",
         }
+
+        token = jwt.createJwt({user_id: user.id, profile: recipient_data})
         done();
       })
     })
@@ -65,9 +64,7 @@ describe('GET recipients', function() {
 
       factory.create('user').then(function(new_user) {
         user = new_user;
-        return jwt.createJwt({user_id: user.id, usd_amount: 6})
-      }).then(function(new_token) {
-        token = new_token;
+        token = jwt.createJwt({user_id: user.id, usd_amount: 6})
 
         return creators.recipient.create_with_verifs({
           phone: 4783920,

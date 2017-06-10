@@ -81,10 +81,10 @@ describe('auth/facebook Sign Up', function() {
       .end(function(err, res) {
         expect(res.statusCode).toEqual(200)
         expect(res.body.user_id).toBeGreaterThan(0)
-        jwt.verifyJwt(res.body.token).then(function(token_data) {
-          expect(token_data.email).toEqual(profile_data.email)
-          done();
-        })
+        var token_data = jwt.verifyJwt(res.body.token)
+        
+        expect(token_data.profile.email).toEqual(profile_data.email)
+        done();
       })
    })
 })
@@ -123,10 +123,10 @@ describe('auth/facebook Log In', function() {
       .send( {profile: profile_data} )
       .end(function(err, res) {
         expect(res.statusCode).toEqual(200)
-        jwt.verifyJwt(res.body.token).then(function(token_data) {
-          expect(token_data.profile.email).toEqual(profile_data.email)
-          done();
-        })
+
+        var token_data = jwt.verifyJwt(res.body.token)
+        expect(token_data.profile.email).toEqual(profile_data.email)
+        done();
       })
   })
 

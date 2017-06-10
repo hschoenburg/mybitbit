@@ -11,9 +11,8 @@ module.exports = function(app) {
     models.User.findAll({where: { facebook_id: profile.facebook_id, email: profile.email } }).then(function(user) {
 
       if(user.length > 0) {
-        jwt.createJwt({profile: profile, user_id: user[0].id }).then(function(jwt) {
-          res.json({token: jwt, user_id: user[0].id})
-        })
+        var token = jwt.createJwt({profile: profile, user_id: user[0].id})
+        res.json({token: token, user_id: user[0].id})
       } else {
         var savedNewUser;
         creators.user.create_from_facebook(profile).then(function(newUser) {
@@ -22,9 +21,8 @@ module.exports = function(app) {
           // Create $1 Signup Credit
           return creators.credit.createForReward(1, newUser.id)
         }).then(function(credit) {
-          return jwt.createJwt(profile)
-        }).then(function(jwt) {
-            res.json({token: jwt, user_id: savedNewUser.id})
+          var token = jwt.createJwt({profile: profile, user_id: savedNewUser.id})
+          res.json({token: token, user_id: savedNewUser.id})
         }).catch(function(err) {
           throw err;
           res.send(err)

@@ -31,13 +31,13 @@ describe('account/balance/:user_id', function() {
     factory.create('user').then(function(new_user) {
       user = new_user;
 
+      jwt_token = jwt.createJwt({user_id: user.id, profile: new_user})
+
       Promise.join(factory.createMany('debit', 4, {user_id: user.id, usd_amount: 4}),
         factory.createMany('credit', 6, {user_id: user.id, usd_amount: 6}),
-        jwt.createJwt({user_id: user.id, usd_amount: 6}),
         function(new_debits, new_credits, token) {
           debits = new_debits;
           credits = new_credits;
-          jwt_token = token;
           done();
         })
       })
