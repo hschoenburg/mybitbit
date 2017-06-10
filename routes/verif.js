@@ -30,22 +30,24 @@ module.exports = function(app) {
   })
 
   app.post('/verifs/send', function(req, res, next) {
+    console.log('HERE?')
       models.Verif.findAll({where: { recipient_id: req.body.recipient_id, sent_at: null}, include: [ {model: models.Recipient}]}).then(function(verifs) {
 
         console.log(verifs[0].code)
         console.log(verifs[0].Recipient.email)
-        res.end()
         var verif_link = '<a href="localhost:3000/verifs/redeem/' + verifs[0].code + '"</a>';
         console.log(verif_link)
 
+            //'<html><body><p> Please verify your email address by clicking on this link</p>'+ verif_link + '</body></html>',
         sparkPost.transmissions.send({
           options: {
-            sandbox: true,
+            sandbox: false,
           },
           content: {
             from: 'hans@mybitbit.com',
             subject: 'Someone Wants to send you PHP',
-            html: '<html><body><p> Please verify your email address by clicking on this link</p>'+ verif_link + '</body></html>',
+            html: verif_link,
+
           },
           recipients: [
             {address: 'hschoenburg@gmail.com'},
