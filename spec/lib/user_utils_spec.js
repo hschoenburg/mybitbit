@@ -11,7 +11,7 @@ var UserUtils = require('../../lib/user_utils')
 
 describe('user_utils.calcBalance', function() {
   
-  beforeAll(function(done) {
+  beforeEach(function(done) {
     factory.create('user').then(function(new_user) {
       user = new_user;
 
