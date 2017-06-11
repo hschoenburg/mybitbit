@@ -23,14 +23,12 @@ class Recipient extends Component {
       body: JSON.stringify({ recipient_id: this.props.recipient.id})
 
     }).then(function(response){
-      console.log(response);
       if(response.ok) {
         // TODO pushing the entire state array feels ugly......
         //that.props.pushNewRecipient(that.state)
       }
     }).catch(function(err) {
-      console.log(err);
-      return false;
+      throw err;
     })
         
   }
@@ -38,7 +36,6 @@ class Recipient extends Component {
   render() {
     var verified = this.props.recipient.email_verif ? true : false;
 
-    console.log(this.props.recipient)
     let verif_button;
 
     if(!this.props.recipient.email_verif && this.props.recipient.email) {

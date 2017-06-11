@@ -34,13 +34,12 @@ class RecipientsForm extends Component {
       body: JSON.stringify({ recipient: this.state })
 
     }).then(function(response){
-      console.log(response);
       if(response.ok) {
         // TODO pushing the entire state array feels ugly......
         that.props.pushNewRecipient(that.state)
       }
     }).catch(function(err) {
-      console.log(err);
+      throw err;
       return false;
     })
         

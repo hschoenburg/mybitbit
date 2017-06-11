@@ -68,7 +68,7 @@ describe('auth/facebook Sign Up', function() {
           expect(total).toEqual(1)
             done()
         }).catch(function(err) {
-          console.log(err)
+          throw err;
         })
       })
   })

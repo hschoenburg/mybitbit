@@ -14,7 +14,6 @@ class Recipients extends Component {
   }
 
   componentDidMount() {
-    console.log("mounted")
     // TODO that=this feels ugly. Pass a callback instead?
     var that = this;
     fetch('/recipients', {
@@ -26,10 +25,9 @@ class Recipients extends Component {
     }).then(function(response) {
       return response.json()
     }).then(function(data) {
-      console.log(data);
       that.setState({recipients: data.recipients})
     }).catch(function(err) {
-      console.log(err);
+      throw err;
     })
 
   }
@@ -41,8 +39,6 @@ class Recipients extends Component {
 
   render() {
 
-    console.log(this.props)
-    console.log('recip render')
     return (
       <div className='recipients'>
         <RecipientsForm user_id={this.props.user_id} token={this.props.token} pushNewRecipient={this.pushNewRecipient.bind(this)}/>
