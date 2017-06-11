@@ -37,7 +37,7 @@ module.exports = function(app) {
         if(!code || !email) { 
           throw "Missing code or email";
         }
-        var verif_link = "<html><body><p><a href='http://localhost:3000/verifs/redeem/" + verifs[0].code + "'>Click here to verify your email address</a></p></body></html>";
+        var verif_link = "<html><body><p><a href='" + process.env.HOSTNAME + "/verifs/redeem/" + verifs[0].code + "'>Click here to verify your email address</a></p></body></html>";
 
         sparkPost.transmissions.send({
           options: {
@@ -45,7 +45,7 @@ module.exports = function(app) {
           },
           content: {
             from: 'hans@mybitbit.com',
-            subject: 'Beta: Do you want some PHP? Time to verify your email!',
+            subject: 'Beta Staging: Do you want some PHP? Time to verify your email!',
             html: verif_link,
 
           },

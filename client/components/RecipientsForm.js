@@ -36,6 +36,7 @@ class RecipientsForm extends Component {
     }).then(function(response){
       if(response.ok) {
         // TODO pushing the entire state array feels ugly......
+        // this is not working recipien_id is not making it up the tree TODO
         that.props.pushNewRecipient(that.state)
       }
     }).catch(function(err) {

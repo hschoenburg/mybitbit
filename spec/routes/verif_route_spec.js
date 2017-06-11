@@ -33,7 +33,7 @@ describe('/verifs', function() {
 
   describe('verifs/redeem', function() {
 
-    fit('update the verif as redeemed', function(done) {
+    it('update the verif as redeemed', function(done) {
       request(app)
         .get('/verifs/redeem/'+ code)
         .end(function(err, res) {
@@ -51,7 +51,7 @@ describe('/verifs', function() {
 
   describe('verifs/send', function() {
 
-    xit('sends the verif and updates sent_at', function(done) {
+    it('sends the verif and updates sent_at', function(done) {
       // this kind of spy doesnt work with API integration tests
       //var Sparky = require('sparkpost')
       //var sparkPost = new Sparky(process.env.SPARKPOST_KEY).transmissions;
