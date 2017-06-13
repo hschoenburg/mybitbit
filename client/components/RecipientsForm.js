@@ -10,7 +10,8 @@ class RecipientsForm extends Component {
 		this.state = {
 			name: '',
       phone: '',
-      email: ''
+      email: '',
+      id: ''
 		}
 			
 
@@ -29,16 +30,26 @@ class RecipientsForm extends Component {
       method: 'POST',
       headers: {
           'x-api-token': this.props.token,
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
       body: JSON.stringify({ recipient: this.state })
 
     }).then(function(response){
-      if(response.ok) {
+
+      return response.json();
+    }).then(function(data) {
+
+        var newRecipient = {
+          name: that.state.name,
+          phone: that.state.phone,
+          email: that.state.email,
+          id: data.recipient_id
+        }
+
         // TODO pushing the entire state array feels ugly......
         // this is not working recipien_id is not making it up the tree TODO
-        that.props.pushNewRecipient(that.state)
-      }
+        that.props.pushNewRecipient(newRecipient);
     }).catch(function(err) {
       throw err;
       return false;

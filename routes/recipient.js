@@ -22,7 +22,7 @@ module.exports = function(app) {
       name: data.name
     }).then(function(recipient) {
       res.status(200)
-      res.json({recipient_id: recipient.id, message: "Recipient Created!"})
+      res.json({recipient_id: recipient.recipient.id, message: "Recipient Created!"})
     }).catch(function(err) {
       res.status(500)
       console.log(err) 

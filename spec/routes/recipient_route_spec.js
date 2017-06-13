@@ -54,6 +54,23 @@ describe('POST a new recipient', function() {
         })
       })
   })
+
+
+  it('responds with the id of the id of the newly created recipient', function(done) {
+    request(app)
+      .post('/recipients')
+
+      .set('x-api-token', token)
+      .send( {recipient: recipient_data} )
+      .end(function(err, res) {
+        expect(res.statusCode).toEqual(200)
+        models.Recipient.findOne({where: {sender_id: user.id}}).then(function(recipient) {
+          expect(recipient.phone).toEqual(recipient_data.phone.toString())
+          expect(res.body.recipient_id).toBeGreaterThan(0)
+          done()
+        })
+      })
+  })
 })
 
 describe('GET recipients', function() {

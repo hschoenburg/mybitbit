@@ -29,7 +29,7 @@ module.exports = function(app) {
   })
 
   app.post('/verifs/send', function(req, res, next) {
-      models.Verif.findAll({where: { recipient_id: req.body.recipient_id, sent_at: null}, include: [ {model: models.Recipient}]}).then(function(verifs) {
+      models.Verif.findAll({where: { recipient_id: req.body.recipient_id, redeemed: false}, include: [ {model: models.Recipient}]}).then(function(verifs) {
 
         var code = verifs[0].code
         var email = verifs[0].Recipient.email

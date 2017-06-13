@@ -20,10 +20,11 @@ class Recipient extends Component {
           'x-api-token': this.props.token,
           'Content-Type': 'application/json'
         },
-      body: JSON.stringify({ recipient_id: this.props.recipient.id})
+      body: JSON.stringify({ recipient_id: this.props.recipient.id, hans: 'good times'})
 
     }).then(function(response){
       if(response.ok) {
+        console.log('VERIF EMAIL SENT')
         // TODO pushing the entire state array feels ugly......
         //that.props.pushNewRecipient(that.state)
       }
@@ -38,6 +39,7 @@ class Recipient extends Component {
 
     let verif_button;
 
+
     if(!this.props.recipient.email_verif && this.props.recipient.email) {
       verif_button = (
         <div>
@@ -51,7 +53,7 @@ class Recipient extends Component {
     return (
       <li>
         <p>
-          {'Name: '+this.props.recipient.name + ' email:  ' + this.props.recipient.email + ' Verified: '+verified}
+          {'Name: '+this.props.recipient.id+this.props.recipient.name + ' email:  ' + this.props.recipient.email + ' Verified: '+verified}
         </p>
         {verif_button}
 
