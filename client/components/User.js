@@ -12,8 +12,19 @@ class User extends Component {
     }
   }
 
-  updateProfileData(fb_profile) {
-    this.setState(Object.assign({}, this.state, { profileData: fb_profile }))
+  componentWillMount() {
+
+    var previousProfile = JSON.parse(window.sessionStorage.getItem('bitbitProfile'))
+
+    if(previousProfile) {
+      this.setState(Object.assign({}, this.state, { profileData: previousProfile }))
+    }
+  }
+
+  updateProfileData(fbProfile) {
+
+    window.sessionStorage.setItem('bitbitProfile', JSON.stringify(fbProfile))
+    this.setState(Object.assign({}, this.state, { profileData: fbProfile }))
   }
 
   updateAuthData(auth_response) {
@@ -38,7 +49,7 @@ class User extends Component {
         <p>Here is the User Details Box for User {this.props.userId}</p>
         {userDetails}
          <div className='userDetails'>
-          <UserAuth userId={this.props.userId} updateProfileData={this.updateProfileData.bind(this)}
+          <UserAuth logoutUser={this.props.logoutUser.bind(this)} userId={this.props.userId} updateProfileData={this.updateProfileData.bind(this)}
                     updateAuthData={this.updateAuthData.bind(this)}
                   />
         </div>

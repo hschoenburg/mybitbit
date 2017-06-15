@@ -16,7 +16,6 @@ describe('request without valid token', function() {
       .set('x-api-token', 'ksdksfkdsfkdnsf')
       .end(function(err, res) {
         if(err) { throw err; }
-          console.log(res.body);
         expect(res.statusCode).toEqual(401);
         expect(res.body.success).toBe(false)
         done();

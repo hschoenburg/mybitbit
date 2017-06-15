@@ -20,6 +20,10 @@ class UserAuth extends Component {
     })
   }
 
+  componentDidMount() {
+
+  }
+
   fbLogoutUser(e) {
     // delete token from LocalStorage
     // and remove it from App.js using props function
@@ -37,9 +41,11 @@ class UserAuth extends Component {
       hello(auth.network).api('me').then(function(profile) {
         var myProfile = profile;
         myProfile.facebook_id = profile.id.toString()
+
         delete myProfile.id
         myProfile.facebook_token = token
         profileUpdate(myProfile)
+
 
         request
           .post('/auth/facebook')
@@ -48,7 +54,7 @@ class UserAuth extends Component {
             profile: myProfile
           })
           .end(function(err, res) {
-            authUpdate({jwt: res.body.token, user_id: res.body.user_id})
+            authUpdate({jwt: res.body.token, userId: res.body.user_id})
           })
       })
     })
@@ -64,7 +70,7 @@ class UserAuth extends Component {
 
       Button = (
         <div className='logout-button'>
-          <a href='#' onClick={this.fbLogoutUser.bind(this)} >
+          <a href='#' onClick={this.props.logoutUser} >
             Logout
           </a>
         </div>

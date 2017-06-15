@@ -24,7 +24,6 @@ class Recipient extends Component {
 
     }).then(function(response){
       if(response.ok) {
-        console.log('VERIF EMAIL SENT')
         // TODO pushing the entire state array feels ugly......
         //that.props.pushNewRecipient(that.state)
       }
