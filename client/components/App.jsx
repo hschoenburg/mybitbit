@@ -5,7 +5,9 @@ import './App.scss';
 
 import User from './User'
 
-import Recipients from './Recipients'
+//import Recipients from './Recipients'
+
+import Friends from './Friends'
 
 class App extends Component {  
   constructor() {
@@ -50,10 +52,9 @@ class App extends Component {
     
 
   render() {
-    let Recip;
     if(this.state.userId) {
-      Recip = (
-        <Recipients userId={this.state.userId} token={this.state.jwt}/>
+       var Invite = (
+          <Friends userId={this.state.userId} token={this.state.jwt}/>
       )
     }
     return (
@@ -62,7 +63,7 @@ class App extends Component {
         <p>userId: {this.state.userId}</p>
         <p>jwt: { this.state.jwt} </p>
         <User logoutUser={this.logoutUser.bind(this)} userId={this.state.userId} updateAuthData={this.updateAuthData.bind(this)} />
-        {Recip}
+        {Invite}
       </div>
     );
   }

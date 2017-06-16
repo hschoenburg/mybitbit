@@ -17,6 +17,7 @@ class UserAuth extends Component {
       facebook: "1754938408152723"
     }, {
       redirect_uri: redirect
+		
     })
   }
 
@@ -59,7 +60,7 @@ class UserAuth extends Component {
       })
     })
 
-    hello('facebook').login()
+    hello('facebook').login({scope: "friends", force: true})
   }
 
 

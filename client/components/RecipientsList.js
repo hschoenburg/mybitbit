@@ -3,7 +3,7 @@ import React, { Component,  PropTypes }  from 'react';
 import Recipient from './Recipient'
 
 
-class RecipientsList extends Component {  
+class Friends extends Component {  
 
   render() {
     let list = this.props.recipients.map((item) => {
