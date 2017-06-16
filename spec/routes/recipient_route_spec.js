@@ -29,7 +29,7 @@ describe('POST a new recipient', function() {
     })
 
   //.set('x-api-token', jwt_token)
-  it('fail without a valid token', function(done) {
+  xit('fail without a valid token', function(done) {
     request(app)
       .post('/recipients')
       .set('x-api-token', 'ksdksfkdsfkdnsf')
@@ -40,7 +40,7 @@ describe('POST a new recipient', function() {
       })
   })
 
-  it('creates a recipient with the proper method and sender_id', function(done) {
+  xit('creates a recipient wxith the proper method and sender_id', function(done) {
     request(app)
       .post('/recipients')
 
@@ -56,7 +56,7 @@ describe('POST a new recipient', function() {
   })
 
 
-  it('responds with the id of the id of the newly created recipient', function(done) {
+  xit('responds with the id of the id of the newly created recipient', function(done) {
     request(app)
       .post('/recipients')
 
@@ -95,7 +95,7 @@ describe('GET recipients', function() {
       }).catch(function(err) { throw err; })
     })
 
-  it('should return a list of recipients saved by the user using the user_id in the token', function(done) {
+  xit('should return a list of recipients saved by the user using the user_id in the token', function(done) {
     request(app)
       .get('/recipients')
       .set('x-api-token', token)

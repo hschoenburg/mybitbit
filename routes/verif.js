@@ -3,20 +3,16 @@ var creators = require('../lib/creators/index')
 var apiAuth = require('../lib/api_auth')
 var Promise = require('bluebird')
 
-var Sparky = require('sparkpost')
-var sparkPost = new Sparky(process.env.SPARKPOST_KEY);
-
-
 module.exports = function(app) {
 
   app.get('/verifs/redeem/:code', function(req, res, next) {
     // look up verif and mark it as redeemded
-    models.Verif.findAll({where: { code: req.params.code}, include: [{model: models.Recipient}] }).then(function(verif) {
+    models.Verif.findAll({where: { code: req.params.code, redeemed: false}, include: [{model: models.User}]} ).then(function(verif) {
 
       verif[0].redeemed = true;
-      verif[0].Recipient.email_verif = true;
+      verif[0].User.email_verified = true;
 
-      Promise.join(verif[0].save(), verif[0].Recipient.save(), function(verif, recipient) {
+      Promise.join(verif[0].save(), verif[0].User.save(), function(verif, recipient) {
 
         res.send("success you are verified!")
       })
